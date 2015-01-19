@@ -28,7 +28,6 @@ create table `lampjavel_images` (
 create table `lampjavel_categories` (
     `name` varchar(20) not null,
     `channel_name` varchar(20) default null,
-    `public` boolean,
     `created` timestamp not null default '0000-00-00 00:00:00',
     `updated` timestamp not null default current_timestamp on update current_timestamp,
     primary key (`name`),
@@ -58,14 +57,6 @@ create table `lampjavel_channel_viewers` (
     foreign key (`channel_name`) references `lampjavel_channels` (`name`),
     foreign key (`username`) references `lampjavel_users` (`username`),
     unique (`channel_name`, `username`)
-);
-
-create table `lampjavel_channel_images` (
-    `channel_name` varchar(20) not null,
-    `image_id` int(9) not null,
-    foreign key (`channel_name`) references `lampjavel_channels` (`name`),
-    foreign key (`image_id`) references `lampjavel_images` (`id`),
-    unique (`channel_name`, `image_id`)
 );
 
 create table `lampjavel_category_images` (
