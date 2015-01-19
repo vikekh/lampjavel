@@ -4,16 +4,8 @@ drop table if exists `lampjavel_channel_viewers`;
 drop table if exists `lampjavel_channel_admins`;
 drop table if exists `lampjavel_users`;
 drop table if exists `lampjavel_categories`;
-drop table if exists `lampjavel_channels`;
 drop table if exists `lampjavel_images`;
-
-create table `lampjavel_images` (
-    `id` int(9) not null auto_increment,
-    `url` varchar(100) not null,
-    `created` timestamp not null default '0000-00-00 00:00:00',
-    `updated` timestamp not null default current_timestamp on update current_timestamp,
-    primary key (`id`)
-);
+drop table if exists `lampjavel_channels`;
 
 create table `lampjavel_channels` (
     `name` varchar(20) not null,
@@ -21,6 +13,16 @@ create table `lampjavel_channels` (
     `created` timestamp not null default '0000-00-00 00:00:00',
     `updated` timestamp not null default current_timestamp on update current_timestamp,
     primary key (`name`)
+);
+
+create table `lampjavel_images` (
+    `id` int(9) not null auto_increment,
+    `channel_name` varchar(20) not null,
+    `url` varchar(100) not null,
+    `created` timestamp not null default '0000-00-00 00:00:00',
+    `updated` timestamp not null default current_timestamp on update current_timestamp,
+    primary key (`id`),
+    foreign key (`channel_name`) references `lampjavel_channels` (`name`)
 );
 
 create table `lampjavel_categories` (
@@ -74,5 +76,5 @@ create table `lampjavel_category_images` (
     unique (`category_name`, `image_id`)
 );
 
-insert into `lampjavel_users` (`username`, `email`, `created`, `updated`)
-values ('admin', 'admin@admin.com', null, null);
+insert into `lampjavel_users` (`username`, `email`, `created`, `updated`) values
+('admin', 'admin@admin.com', null, null);
