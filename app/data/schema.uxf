@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>280</y>
+      <w>160</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>channels
+--
+_name: varchar_
+/admin: users.username/
+public: boolean
+created: timestamp
+updated: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>890</x>
+      <y>280</y>
+      <w>200</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>images
+--
+_id: int_
+/channel_name: channel.name/
+url: varchar
+created: timestamp
+updated: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>440</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>categories
+--
+_name: varchar_
+/channel_name: channel.name/
+created: timestamp
+updated: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>440</y>
+      <w>160</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>users
+--
+_username: varchar_
+email: varchar
+password_hash: varchar
+created: timestamp
+updated: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>280</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>channel_members
+--
+_/channel_name: channels.name/_
+_/username: users.username/_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>440</y>
+      <w>220</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>category_images
+--
+_/category_name: categories.name/_
+_/image_id: images.id/_</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
