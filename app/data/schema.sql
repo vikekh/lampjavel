@@ -1,7 +1,6 @@
 drop table if exists `lampjavel_category_images`;
 drop table if exists `lampjavel_channel_images`;
-drop table if exists `lampjavel_channel_viewers`;
-drop table if exists `lampjavel_channel_admins`;
+drop table if exists `lampjavel_channel_members`;
 drop table if exists `lampjavel_users`;
 drop table if exists `lampjavel_categories`;
 drop table if exists `lampjavel_images`;
@@ -45,7 +44,7 @@ create table `lampjavel_users` (
     primary key (`username`)
 );
 
-create table `lampjavel_channel_viewers` (
+create table `lampjavel_channel_members` (
 	`channel_name` varchar(20) default null,
 	`username` varchar(20) not null,
     foreign key (`channel_name`) references `lampjavel_channels` (`name`),
