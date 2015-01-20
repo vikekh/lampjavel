@@ -9,10 +9,12 @@ drop table if exists `lampjavel_channels`;
 
 create table `lampjavel_channels` (
     `name` varchar(20) not null,
+    `admin` varchar(20) default null,
     `public` boolean,
     `created` timestamp not null default '0000-00-00 00:00:00',
     `updated` timestamp not null default current_timestamp on update current_timestamp,
-    primary key (`name`)
+    primary key (`name`),
+    foreign key (`admin`) references `lampjavel_users` (`username`)
 );
 
 create table `lampjavel_images` (
@@ -41,14 +43,6 @@ create table `lampjavel_users` (
     `created` timestamp not null default '0000-00-00 00:00:00',
     `updated` timestamp not null default current_timestamp on update current_timestamp,
     primary key (`username`)
-);
-
-create table `lampjavel_channel_admins` (
-	`channel_name` varchar(20) default null,
-	`username` varchar(20) not null,
-    foreign key (`channel_name`) references `lampjavel_channels` (`name`),
-    foreign key (`username`) references `lampjavel_users` (`username`),
-    unique (`channel_name`)
 );
 
 create table `lampjavel_channel_viewers` (
