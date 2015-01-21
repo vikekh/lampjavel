@@ -1,10 +1,19 @@
 drop table if exists `lampjavel_category_images`;
 drop table if exists `lampjavel_channel_images`;
 drop table if exists `lampjavel_channel_members`;
-drop table if exists `lampjavel_users`;
 drop table if exists `lampjavel_categories`;
 drop table if exists `lampjavel_images`;
 drop table if exists `lampjavel_channels`;
+drop table if exists `lampjavel_users`;
+
+create table `lampjavel_users` (
+    `username` varchar(20) not null,
+    `email` varchar(100) not null,
+    `password_hash` varchar(255) default null,
+    `created` timestamp not null default '0000-00-00 00:00:00',
+    `updated` timestamp not null default current_timestamp on update current_timestamp,
+    primary key (`username`)
+);
 
 create table `lampjavel_channels` (
     `name` varchar(20) not null,
@@ -33,15 +42,6 @@ create table `lampjavel_categories` (
     `updated` timestamp not null default current_timestamp on update current_timestamp,
     primary key (`name`),
     foreign key (`channel_name`) references `lampjavel_channels` (`name`)
-);
-
-create table `lampjavel_users` (
-    `username` varchar(20) not null,
-    `email` varchar(100) not null,
-    `password_hash` varchar(255) default null,
-    `created` timestamp not null default '0000-00-00 00:00:00',
-    `updated` timestamp not null default current_timestamp on update current_timestamp,
-    primary key (`username`)
 );
 
 create table `lampjavel_channel_members` (
