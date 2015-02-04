@@ -1,7 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
-require '../api/config.php';
+require '../app/config.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
