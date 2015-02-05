@@ -16,7 +16,7 @@ $capsule->bootEloquent();
 $app = new \Slim\Slim();
 
 $app->get('/', function () use ($app) {
-	echo '/';
+    echo '/';
 });
 
 $app->get('/latest', function () use ($app) {

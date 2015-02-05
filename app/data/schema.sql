@@ -45,8 +45,8 @@ create table `lampjavel_categories` (
 );
 
 create table `lampjavel_channel_members` (
-	`channel_name` varchar(20) default null,
-	`username` varchar(20) not null,
+    `channel_name` varchar(20) default null,
+    `username` varchar(20) not null,
     foreign key (`channel_name`) references `lampjavel_channels` (`name`),
     foreign key (`username`) references `lampjavel_users` (`username`),
     unique (`channel_name`, `username`)
