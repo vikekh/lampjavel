@@ -36,8 +36,12 @@ $app->group('/images', function () use ($app) {
         echo $image->toJson();
     });
 
-    $app->get('/:channelName', function ($channelName) use ($app) {
+    $app->get('/:channelName/:id', function ($channelName, $id = null) use ($app) {
         $images = \Image::where('channel_name', '=', $channelName);
+
+        if ($id != null) {
+            $images = $images->find(intval($id));
+        }
 
         if ($app->request->get('orderby')) {
             $orderBy = $app->request->get('orderby');
@@ -57,6 +61,18 @@ $app->group('/images', function () use ($app) {
         }
 
         echo $images->get()->toJson();
+    });
+
+    $app->put('/:channelName/:id', function ($channelName, $id) use ($app) {
+        $image = \Image::find(intval($id));
+
+        if ($url = $app->request->params('url')) {
+            $image->url = $url;
+        }
+
+        $image->save();
+
+        echo $image->toJson();
     });
 
 });
