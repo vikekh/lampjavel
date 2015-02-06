@@ -19,6 +19,32 @@ $app->get('/', function () use ($app) {
     echo '/';
 });
 
+$app->group('/channels', function () use ($app) {
+
+    $app->post('/', function () use ($app) {
+        $channel = new \Channel;
+
+        if ($name = $app->request->post('name')) {
+            $channel->name = $name;
+        }
+
+        if ($admin = $app->request->post('admin')) {
+            $channel->admin = $admin;
+        }
+
+        if ($public = $app->request->post('public')) {
+            $channel->public = boolval($public);
+        }
+
+        $channel->created = null;
+        $channel->updated = null;
+        $channel->save();
+
+        echo $channel->toJson();
+    });
+
+});
+
 $app->group('/images', function () use ($app) {
 
     $app->post('/:channelName', function ($channelName) use ($app) {
