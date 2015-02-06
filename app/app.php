@@ -75,6 +75,11 @@ $app->group('/images', function () use ($app) {
         echo $image->toJson();
     });
 
+    $app->delete('/:channelName/:id', function ($channelName, $id) {
+        $image = \Image::find(intval($id));
+        $image->delete();
+    });
+
 });
 
 $app->run();
