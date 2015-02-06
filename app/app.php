@@ -36,7 +36,7 @@ $app->group('/images', function () use ($app) {
         echo $image->toJson();
     });
 
-    $app->get('/:channelName/:id', function ($channelName, $id = null) use ($app) {
+    $app->get('/:channelName(/:id)', function ($channelName, $id = null) use ($app) {
         $images = \Image::where('channel_name', '=', $channelName);
 
         if ($id != null) {
