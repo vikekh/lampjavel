@@ -19,6 +19,21 @@ $app->get('/', function () use ($app) {
     echo '/';
 });
 
+$app->post('/images/:channelName', function ($channelName) use ($app) {
+    $image = new \Image;
+
+    if ($url = $app->request->post('url')) {
+        $image->url = $url;
+    }
+
+    $image->channel_name = $channelName;
+    $image->created = null;
+    $image->updated = null;
+    $image->save();
+
+    echo $image->toJson();
+});
+
 $app->get('/images/:channelName', function ($channelName) use ($app) {
     $images = \Image::where('channel_name', '=', $channelName);
 
