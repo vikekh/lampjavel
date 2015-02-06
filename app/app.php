@@ -19,19 +19,27 @@ $app->get('/', function () use ($app) {
     echo '/';
 });
 
-$app->get('/latest', function () use ($app) {
-    $images = \Image::all();
-    echo $images->toJson();
-});
+$app->get('/images/:channelName', function ($channelName) use ($app) {
+    $images = \Image::where('channel_name', '=', $channelName);
 
-$app->get('/channels/:name', function ($name) use ($app) {
-    $images = \Image::where('channel_name', '=', $name)->get();
-    echo $images->toJson();
-});
+    if ($app->request->get('orderby')) {
+        $orderBy = $app->request->get('orderby');
 
-$app->get('/channels/:name/random', function ($name) use ($app) {
-    $image = \Image::where('channel_name', '=', $name)->orderByRaw('RAND()')->first();
-    echo $image->toJson();
+        switch ($orderBy) {
+            case 'random':
+                $images = $images->orderByRaw('RAND()');
+        }
+    }
+
+    if ($app->request->get('limit')) {
+        $limit = $app->request->get('limit');
+
+        if (is_numeric($limit)) {
+            $images = $images->take(intval($limit));
+        }
+    }
+
+    echo $images->get()->toJson();
 });
 
 $app->run();
