@@ -19,42 +19,46 @@ $app->get('/', function () use ($app) {
     echo '/';
 });
 
-$app->post('/images/:channelName', function ($channelName) use ($app) {
-    $image = new \Image;
+$app->group('/images', function () use ($app) {
 
-    if ($url = $app->request->post('url')) {
-        $image->url = $url;
-    }
+    $app->post('/:channelName', function ($channelName) use ($app) {
+        $image = new \Image;
 
-    $image->channel_name = $channelName;
-    $image->created = null;
-    $image->updated = null;
-    $image->save();
-
-    echo $image->toJson();
-});
-
-$app->get('/images/:channelName', function ($channelName) use ($app) {
-    $images = \Image::where('channel_name', '=', $channelName);
-
-    if ($app->request->get('orderby')) {
-        $orderBy = $app->request->get('orderby');
-
-        switch ($orderBy) {
-            case 'random':
-                $images = $images->orderByRaw('RAND()');
+        if ($url = $app->request->post('url')) {
+            $image->url = $url;
         }
-    }
 
-    if ($app->request->get('limit')) {
-        $limit = $app->request->get('limit');
+        $image->channel_name = $channelName;
+        $image->created = null;
+        $image->updated = null;
+        $image->save();
 
-        if (is_numeric($limit)) {
-            $images = $images->take(intval($limit));
+        echo $image->toJson();
+    });
+
+    $app->get('/:channelName', function ($channelName) use ($app) {
+        $images = \Image::where('channel_name', '=', $channelName);
+
+        if ($app->request->get('orderby')) {
+            $orderBy = $app->request->get('orderby');
+
+            switch ($orderBy) {
+                case 'random':
+                    $images = $images->orderByRaw('RAND()');
+            }
         }
-    }
 
-    echo $images->get()->toJson();
+        if ($app->request->get('limit')) {
+            $limit = $app->request->get('limit');
+
+            if (is_numeric($limit)) {
+                $images = $images->take(intval($limit));
+            }
+        }
+
+        echo $images->get()->toJson();
+    });
+
 });
 
 $app->run();
