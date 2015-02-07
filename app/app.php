@@ -3,14 +3,12 @@
 require '../vendor/autoload.php';
 require '../app/config.php';
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-$capsule = new Capsule;
+$capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($config);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim;
 
 $app->get('/', function () use ($app) {
     echo '/';
