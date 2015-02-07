@@ -62,3 +62,9 @@ create table `lampjavel_category_images` (
 
 insert into `lampjavel_users` (`username`, `email`, `created`, `updated`) values
 ('admin', 'admin@admin.com', null, null);
+
+insert into `lampjavel_channels` (`name`, `admin`, `public`, `created`, `updated`) values
+('lampjavel', 'admin', true, null, null);
+
+insert into `lampjavel_images` (`channel_name`, `url`, `created`, `updated`) values
+('lampjavel', 'http://i.imgur.com/MRxVkZw.png', null, null);
