@@ -3,8 +3,6 @@
 require '../vendor/autoload.php';
 require '../app/config.php';
 
-use Eloquence\Database\Traits\CamelCaseModel;
-
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($config);
 $capsule->setAsGlobal();
