@@ -51,7 +51,7 @@ $app->group('/images', function () use ($app) {
             $image->url = $url;
         }
 
-        $image->channel_name = $channelName;
+        $image->channelName = $channelName;
         $image->created = null;
         $image->updated = null;
         $image->save();
