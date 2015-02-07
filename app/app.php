@@ -4,12 +4,9 @@ require '../vendor/autoload.php';
 require '../app/config.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
 
 $capsule = new Capsule;
 $capsule->addConnection($config);
-$capsule->setEventDispatcher(new Dispatcher(new Container));
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
