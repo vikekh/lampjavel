@@ -20,7 +20,7 @@
                 var timeout = 1000*parseInt(getParameterByName('timeout')) || null;
 
                 $.ajax({
-                    url: 'http://localhost/lampjavel/api/images/' + channel + '?orderby=random&limit=1',
+                    url: 'http://localhost/lampjavel/api/channels/' + channel + '/images?orderby=random&limit=1',
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {

@@ -68,7 +68,7 @@
 
                 function postImage(channelName, image) {
                     $.ajax({
-                        url: 'http://localhost/lampjavel/api/images/' + channelName,
+                        url: 'http://localhost/lampjavel/api/channels/' + channelName + '/images',
                         type: 'POST',
                         data: {
                             url: image
