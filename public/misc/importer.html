@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>lampja:vel/importer</title>
+    </head>
+    <body>
+        <input id="input" type="file" multiple="multiple">
+        <pre id="output"></pre>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+
+            $(function () {
+
+                var input = $('#input');
+                var data = {};
+
+                function addFile(file) {
+                    var reader = new FileReader();
+                    var channel = file.name.split('.')[0];
+
+                    reader.readAsText(file);
+
+                    reader.onload = function () {
+                        var images = parse(reader.result);
+
+                        data[channel] = images;
+                        post();
+                    }
+                }
+
+                function addFiles(files) {
+                    for (var i = 0; i < files.length; i++) {
+                        addFile(files[i]);
+                    }
+                }
+
+                function log() {
+
+                }
+
+                function parse(content) {
+                    return content.split('\r\n');
+                }
+
+                function post() {
+                    for (var channelName in data) {
+                        if (data.hasOwnProperty(channelName)) {
+                            postChannel(channelName);
+                        }
+                    }
+                }
+
+                function postChannel(name) {
+                    $.ajax({
+                        url: 'http://localhost/lampjavel/api/channels',
+                        type: 'POST',
+                        data: {
+                            name: name,
+                            admin: 'admin',
+                            public: false
+                        },
+                        dataType: 'json',
+                        success: function () {
+                            postImages(name, data[name]);
+                        }
+                    });
+                }
+
+                function postImage(channelName, image) {
+                    $.ajax({
+                        url: 'http://localhost/lampjavel/api/images/' + channelName,
+                        type: 'POST',
+                        data: {
+                            url: image
+                        },
+                        dataType: 'json'
+                    });
+                }
+
+                function postImages(channelName, images) {
+                    for (var i = 0; i < images.length; i++) {
+                        postImage(channelName, images[i]);
+                    }
+                }
+
+                input.on('change', function (event) {
+                    var that = $(this);
+
+                    addFiles(that.get(0).files);
+                });
+
+            });
+
+        </script>
+    </body>
+</html>
