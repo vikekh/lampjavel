@@ -47,17 +47,13 @@ $app->post('/channels/:channelName/images', function ($channelName) use ($app) {
     echo $image->toJson();
 });
 
-$app->get('/channels/:channelName/images(/:imageId)', function ($channelName, $imageId = null) use ($app) {
-    $images = \Channel::find($channelName)->images(); //->where('image_i', '=', $channelName);
-
-    if ($imageId != null) {
-        $images = $images->find(intval($imageId));
-    }
+$app->get('/channels/:channelName/images', function ($channelName) use ($app) {
+    $images = \Channel::find($channelName)->images();
 
     if ($orderBy = $app->request->get('orderby')) {
         switch ($orderBy) {
             case 'random':
-                $images = $images->orderByRaw('RAND()');
+                $images = $images->orderByRaw('rand()');
                 break;
         }
     }
@@ -69,6 +65,12 @@ $app->get('/channels/:channelName/images(/:imageId)', function ($channelName, $i
     }
 
     echo $images->get()->toJson();
+});
+
+$app->get('/images/:imageId', function ($imageId) use ($app) {
+    $image = \Image::find(intval($imageId));
+
+    echo $image->toJson();
 });
 
 $app->run();
