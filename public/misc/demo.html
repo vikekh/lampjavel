@@ -16,20 +16,38 @@
                     return results === null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
                 }
 
+                function update(image) {
+                    $('body').css({
+                        'background-image': 'url("' + image.url + '")',
+                        'cursor': 'pointer'
+                    });
+
+                    $('title').text('lampja:vel/demo #' + image.id);
+                }
+
+                var id = getParameterByName('id');
                 var channel = getParameterByName('channel') || 'lampjavel';
                 var timeout = 1000*parseInt(getParameterByName('timeout')) || null;
 
-                $.ajax({
-                    url: 'http://localhost/lampjavel/api/channels/' + channel + '/images?orderby=random&limit=1',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        $('body').css({
-                            'background-image': 'url("' + data[0].url + '")',
-                            'cursor': 'pointer'
-                        });
-                    }
-                });
+                if (id != null) {
+                    $.ajax({
+                        url: 'http://localhost/lampjavel/api/images/' + id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            update(data);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: 'http://localhost/lampjavel/api/channels/' + channel + '/images?orderby=random&limit=1',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            update(data[0]);
+                        }
+                    });
+                }
 
                 $(document).on('click', function (event) {
                     location.reload();
