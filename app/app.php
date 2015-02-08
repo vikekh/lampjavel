@@ -35,18 +35,18 @@ $app->group('/channels', function () use ($app) {
     });
 
     $app->post('/:channelName/images', function ($channelName) use ($app) {
-        /*$image = new \Image;
+        $image = new \Image;
 
         if ($url = $app->request->post('url')) {
             $image->url = $url;
         }
 
-        $image->channelName = $channelName;
         $image->created = null;
         $image->updated = null;
         $image->save();
+        $image->channels()->sync(array($channelName));
 
-        echo $image->toJson();*/
+        echo $image->toJson();
     });
 
     $app->get('/:channelName/images(/:imageId)', function ($channelName, $imageId = null) use ($app) {

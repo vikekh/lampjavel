@@ -10,6 +10,6 @@ class Image extends \Illuminate\Database\Eloquent\Model {
 
     public function channels()
     {
-        return $this->belongsToMany('Channel', 'channel_images', 'channel_name', 'image_id');
+        return $this->belongsToMany('Channel', 'channel_images', 'image_id', 'channel_name');
     }
 }
