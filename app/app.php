@@ -23,10 +23,6 @@ $app->group('/channels', function () use ($app) {
             $channel->name = $name;
         }
 
-        if ($admin = $app->request->post('admin')) {
-            $channel->admin = $admin;
-        }
-
         if ($public = $app->request->post('public')) {
             $channel->public = boolval($public);
         }
@@ -38,12 +34,8 @@ $app->group('/channels', function () use ($app) {
         echo $channel->toJson();
     });
 
-});
-
-$app->group('/images', function () use ($app) {
-
-    $app->post('/:channelName', function ($channelName) use ($app) {
-        $image = new \Image;
+    $app->post('/:channelName/images', function ($channelName) use ($app) {
+        /*$image = new \Image;
 
         if ($url = $app->request->post('url')) {
             $image->url = $url;
@@ -54,51 +46,31 @@ $app->group('/images', function () use ($app) {
         $image->updated = null;
         $image->save();
 
-        echo $image->toJson();
+        echo $image->toJson();*/
     });
 
-    $app->get('/:channelName(/:id)', function ($channelName, $id = null) use ($app) {
-        $images = \Image::where('channel_name', '=', $channelName);
+    $app->get('/:channelName/images(/:imageId)', function ($channelName, $imageId = null) use ($app) {
+        $images = \Channel::find($channelName)->images(); //->where('image_i', '=', $channelName);
 
-        if ($id != null) {
-            $images = $images->find(intval($id));
+        if ($imageId != null) {
+            $images = $images->find(intval($imageId));
         }
 
-        if ($app->request->get('orderby')) {
-            $orderBy = $app->request->get('orderby');
-
+        if ($orderBy = $app->request->get('orderby')) {
             switch ($orderBy) {
                 case 'random':
                     $images = $images->orderByRaw('RAND()');
+                    break;
             }
         }
 
-        if ($app->request->get('limit')) {
-            $limit = $app->request->get('limit');
-
+        if ($limit = $app->request->get('limit')) {
             if (is_numeric($limit)) {
                 $images = $images->take(intval($limit));
             }
         }
 
         echo $images->get()->toJson();
-    });
-
-    $app->put('/:channelName/:id', function ($channelName, $id) use ($app) {
-        $image = \Image::find(intval($id));
-
-        if ($url = $app->request->params('url')) {
-            $image->url = $url;
-        }
-
-        $image->save();
-
-        echo $image->toJson();
-    });
-
-    $app->delete('/:channelName/:id', function ($channelName, $id) {
-        $image = \Image::find(intval($id));
-        $image->delete();
     });
 
 });
