@@ -19,6 +19,7 @@ $app->group('/channels', function () use ($app) {
         $channel->updated = null;
         $channel->save();
 
+        $app->response->status(201);
         echo $channel->toJson();
     });
 
@@ -28,12 +29,13 @@ $app->group('/channels', function () use ($app) {
         if ($url = $app->request->post('url')) {
             $image->url = $url;
         }
-
+        
         $image->created = null;
         $image->updated = null;
         $image->save();
         $image->channels()->sync(array($channelName));
 
+        $app->response->status(201);
         echo $image->toJson();
     });
 
