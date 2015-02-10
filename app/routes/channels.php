@@ -24,7 +24,7 @@ $app->group('/channels', function () use ($app) {
     });
 
     $app->post('/:channelName/images', function ($channelName) use ($app) {
-        if (!\Channel::find($channelName)) {
+        if (!($channel = \Channel::find($channelName))) {
             $app->halt(400, 'Channel not found.');
         }
 
@@ -37,7 +37,7 @@ $app->group('/channels', function () use ($app) {
         $image->created = null;
         $image->updated = null;
         $image->save();
-        $image->channels()->sync(array($channelName));
+        $image->channels()->sync(array($channel->name));
 
         $app->status(201);
         echo $image->toJson();
