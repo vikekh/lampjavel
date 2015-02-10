@@ -1,10 +1,10 @@
 <?php
 
 require '../vendor/autoload.php';
-require '../app/config.php';
+require '../app/config/database.php';
 
 $capsule = new \Illuminate\Database\Capsule\Manager;
-$capsule->addConnection($config);
+$capsule->addConnection($config['database']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
