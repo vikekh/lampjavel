@@ -69,6 +69,24 @@ $app->group('/channels', function () use ($app) {
 
     // update
 
+    $app->put('/:channelName', function ($channelName) use ($app) {
+        if (!($channel = \Channel::find($channelName))) {
+            $app->halt(400, 'Channel not found.');
+        }
+
+        /*if ($name = $app->request->put('name')) {
+            $channel->name = $name;
+        }*/
+
+        if ($public = $app->request->put('public')) {
+            $channel->public = boolval($public);
+        }
+
+        $channel->save();
+
+        echo $channel->toJson();
+    });
+
     // delete
 
 });
