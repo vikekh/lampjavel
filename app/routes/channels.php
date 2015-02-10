@@ -19,11 +19,15 @@ $app->group('/channels', function () use ($app) {
         $channel->updated = null;
         $channel->save();
 
-        $app->response->status(201);
+        $app->status(201);
         echo $channel->toJson();
     });
 
     $app->post('/:channelName/images', function ($channelName) use ($app) {
+        if (!\Channel::find($channelName)) {
+            $app->halt(400, 'Channel not found.');
+        }
+
         $image = new \Image;
 
         if ($url = $app->request->post('url')) {
@@ -35,14 +39,18 @@ $app->group('/channels', function () use ($app) {
         $image->save();
         $image->channels()->sync(array($channelName));
 
-        $app->response->status(201);
+        $app->status(201);
         echo $image->toJson();
     });
 
     // read
 
     $app->get('/:channelName/images', function ($channelName) use ($app) {
-        $images = \Channel::find($channelName)->images();
+        if (!($channel = \Channel::find($channelName))) {
+            $app->halt(400, 'Channel not found.');
+        }
+
+        $images = $channel->images();
 
         if ($orderBy = $app->request->get('orderby')) {
             switch ($orderBy) {
@@ -53,9 +61,7 @@ $app->group('/channels', function () use ($app) {
         }
 
         if ($limit = $app->request->get('limit')) {
-            if (is_numeric($limit)) {
-                $images = $images->take(intval($limit));
-            }
+            $images = $images->take(intval($limit));
         }
 
         echo $images->get()->toJson();
