@@ -45,6 +45,12 @@ $app->group('/channels', function () use ($app) {
 
     // read
 
+    $app->get('/', function () use ($app) {
+        $channels = \Channel::all();
+
+        echo $channels->toJson();
+    });
+
     $app->get('/:channelName/images', function ($channelName) use ($app) {
         if (!($channel = \Channel::find($channelName))) {
             $app->halt(400, 'Channel not found.');
