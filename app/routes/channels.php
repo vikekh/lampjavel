@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 $app->group('/channels', function () use ($app) {
 
@@ -26,9 +26,9 @@ $app->group('/channels', function () use ($app) {
     });
 
     $app->post('/:channelName/images', function ($channelName) use ($app) {
-        /*if (!($channel = \Channel::find($channelName))) {
+        if (!($channel = \Channel::find($channelName))) {
             $app->halt(400, 'Channel not found.');
-        }*/
+        }
 
         $image = new \Image;
 
@@ -39,10 +39,10 @@ $app->group('/channels', function () use ($app) {
         $image->created = null;
         $image->updated = null;
 
-        //DB::transaction(function () use ($image) {
+        Capsule::transaction(function () use ($image, $channel) {
             $image->save();
-            $image->channels()->attach($channelName); //sync(array($channel->name));
-        //});
+            $image->channels()->attach($channel->name);
+        });
 
         $app->status(201);
         echo $image->toJson();
