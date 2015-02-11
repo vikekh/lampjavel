@@ -61,7 +61,7 @@ $app->group('/channels', function () use ($app) {
             $app->halt(400, 'Channel not found.');
         }
 
-        $images = $channel->images;
+        $images = $channel->images();
 
         if ($orderBy = $app->request->get('orderby')) {
             switch ($orderBy) {
@@ -75,7 +75,7 @@ $app->group('/channels', function () use ($app) {
             $images = $images->take(intval($limit));
         }
 
-        echo $images->toJson();
+        echo $images->get()->toJson();
     });
 
     // update
