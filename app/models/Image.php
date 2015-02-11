@@ -6,6 +6,7 @@ class Image extends \Illuminate\Database\Eloquent\Model {
     use CamelCaseModel;
     
     protected $fillable = array('url');
+    protected $hidden = array('pivot', 'pivotChannelName', 'pivotImageId', 'channels');
     public $timestamps = false;
 
     public function channels()

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 $app->group('/channels', function () use ($app) {
 
     // create
@@ -24,9 +26,9 @@ $app->group('/channels', function () use ($app) {
     });
 
     $app->post('/:channelName/images', function ($channelName) use ($app) {
-        if (!($channel = \Channel::find($channelName))) {
+        /*if (!($channel = \Channel::find($channelName))) {
             $app->halt(400, 'Channel not found.');
-        }
+        }*/
 
         $image = new \Image;
 
@@ -36,8 +38,11 @@ $app->group('/channels', function () use ($app) {
         
         $image->created = null;
         $image->updated = null;
-        $image->save();
-        $image->channels()->sync(array($channel->name));
+
+        //DB::transaction(function () use ($image) {
+            $image->save();
+            $image->channels()->attach($channelName); //sync(array($channel->name));
+        //});
 
         $app->status(201);
         echo $image->toJson();
@@ -56,7 +61,7 @@ $app->group('/channels', function () use ($app) {
             $app->halt(400, 'Channel not found.');
         }
 
-        $images = $channel->images();
+        $images = $channel->images;
 
         if ($orderBy = $app->request->get('orderby')) {
             switch ($orderBy) {
@@ -70,7 +75,7 @@ $app->group('/channels', function () use ($app) {
             $images = $images->take(intval($limit));
         }
 
-        echo $images->get()->toJson();
+        echo $images->toJson();
     });
 
     // update
