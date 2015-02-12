@@ -58,7 +58,7 @@ $app->group('/channels', function () use ($app) {
 
     $app->get('/:channelName/images', function ($channelName) use ($app) {
         if (!($channel = \Channel::find($channelName))) {
-            $app->halt(400, 'Channel not found.');
+            throw new \Exception('Channel not found.');
         }
 
         $images = $channel->images();

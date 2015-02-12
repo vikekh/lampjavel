@@ -26,7 +26,10 @@ require '../app/routes/images.php';
 
 $app->error(function (\Exception $e) use ($app) {
     $app->status(400);
-    echo $e->getMessage();
+    echo json_encode(array(
+        'code'    => 400,
+        'message' => $e->getMessage()
+    ));
 });
 
 $app->run();
