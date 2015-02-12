@@ -57,23 +57,17 @@ $app->group('/channels', function () use ($app) {
     });
 
     $app->get('/:channelName/images', function ($channelName) use ($app) {
+        $params = $app->request->params();
+
         if (!($channel = \Channel::find($channelName))) {
             throw new \Exception('Channel not found.');
         }
 
         $images = $channel->images();
-
-        if ($orderBy = $app->request->get('orderby')) {
-            switch ($orderBy) {
-                case 'random':
-                    $images = $images->orderByRaw('rand()');
-                    break;
-            }
-        }
-
-        if ($limit = $app->request->get('limit')) {
-            $images = $images->take(intval($limit));
-        }
+        
+        $images->sort($params['sort']);
+        $images->skip(intval($params['offset']));
+        $images->take(intval($params['limit']));
 
         echo $images->get()->toJson();
     });
