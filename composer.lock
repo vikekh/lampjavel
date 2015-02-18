@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "62672a876ebbb17e934fdc55b39e8a4d",
+    "hash": "2f47b3efe35c46ff648f86998d421021",
     "packages": [
         {
             "name": "danielstjules/stringy",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danielstjules/Stringy.git",
-                "reference": "6a7b0391b2baf0bfdca3ec0c8d33ff379c2835ad"
+                "reference": "3cf18e9e424a6dedc38b7eb7ef580edb0929461b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/6a7b0391b2baf0bfdca3ec0c8d33ff379c2835ad",
-                "reference": "6a7b0391b2baf0bfdca3ec0c8d33ff379c2835ad",
+                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/3cf18e9e424a6dedc38b7eb7ef580edb0929461b",
+                "reference": "3cf18e9e424a6dedc38b7eb7ef580edb0929461b",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "utility",
                 "utils"
             ],
-            "time": "2015-01-08 15:21:43"
+            "time": "2015-02-10 06:19:18"
         },
         {
             "name": "doctrine/inflector",
@@ -131,16 +131,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.0.0",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "22fae557d2a631585536654fadb069f34c315040"
+                "reference": "7ffdad0a2b2c600445deb57f5f7e93092e44ca2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/22fae557d2a631585536654fadb069f34c315040",
-                "reference": "22fae557d2a631585536654fadb069f34c315040",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/7ffdad0a2b2c600445deb57f5f7e93092e44ca2a",
+                "reference": "7ffdad0a2b2c600445deb57f5f7e93092e44ca2a",
                 "shasum": ""
             },
             "require": {
@@ -169,7 +169,7 @@
                 }
             ],
             "description": "The Illuminate Container package.",
-            "time": "2015-01-07 02:06:23"
+            "time": "2015-02-11 16:00:31"
         },
         {
             "name": "illuminate/contracts",
@@ -270,16 +270,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.0.0",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "306ceb305f5b480608d94355ac3a0a730b21a905"
+                "reference": "405a2241fefa49cfc39b7fba8cc54f69fce2f101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/306ceb305f5b480608d94355ac3a0a730b21a905",
-                "reference": "306ceb305f5b480608d94355ac3a0a730b21a905",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/405a2241fefa49cfc39b7fba8cc54f69fce2f101",
+                "reference": "405a2241fefa49cfc39b7fba8cc54f69fce2f101",
                 "shasum": ""
             },
             "require": {
@@ -317,7 +317,56 @@
                 }
             ],
             "description": "The Illuminate Support package.",
-            "time": "2015-02-03 22:40:35"
+            "time": "2015-02-11 11:08:03"
+        },
+        {
+            "name": "illuminate/validation",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/validation.git",
+                "reference": "331e6ed91766c99e9019675a3b01337e41ea762c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/validation/zipball/331e6ed91766c99e9019675a3b01337e41ea762c",
+                "reference": "331e6ed91766c99e9019675a3b01337e41ea762c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "5.0.*",
+                "illuminate/contracts": "5.0.*",
+                "illuminate/support": "5.0.*",
+                "php": ">=5.4.0",
+                "symfony/http-foundation": "2.6.*",
+                "symfony/translation": "2.6.*"
+            },
+            "suggest": {
+                "illuminate/database": "Required to use the database presence verifier (5.0.*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Validation\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "The Illuminate Validation package.",
+            "time": "2015-01-26 16:15:02"
         },
         {
             "name": "kirkbushell/eloquence",
@@ -524,6 +573,117 @@
                 "router"
             ],
             "time": "2014-12-09 19:59:29"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v2.6.4",
+            "target-dir": "Symfony/Component/HttpFoundation",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/HttpFoundation.git",
+                "reference": "8fa63d614d56ccfe033e30411d90913cfc483ff6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8fa63d614d56ccfe033e30411d90913cfc483ff6",
+                "reference": "8fa63d614d56ccfe033e30411d90913cfc483ff6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "classmap": [
+                    "Symfony/Component/HttpFoundation/Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony HttpFoundation Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-02-01 16:10:57"
+        },
+        {
+            "name": "symfony/translation",
+            "version": "v2.6.4",
+            "target-dir": "Symfony/Component/Translation",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Translation.git",
+                "reference": "f289cdf8179d32058c1e1cbac723106a5ff6fa39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/f289cdf8179d32058c1e1cbac723106a5ff6fa39",
+                "reference": "f289cdf8179d32058c1e1cbac723106a5ff6fa39",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.3,>=2.3.12",
+                "symfony/intl": "~2.3",
+                "symfony/yaml": "~2.2"
+            },
+            "suggest": {
+                "psr/log": "To use logging capability in translator",
+                "symfony/config": "",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Translation\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Translation Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-01-03 15:33:07"
         }
     ],
     "packages-dev": [],
