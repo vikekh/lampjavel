@@ -30,4 +30,12 @@ class Image extends \Illuminate\Database\Eloquent\Model {
                 break;
         }
     }
+
+    public function validate() {
+        if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+
+        return true;
+    } 
 }

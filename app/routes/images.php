@@ -13,8 +13,13 @@ $app->group('/images', function () use ($app) {
         
         $image->created = null;
         $image->updated = null;
+
+        if (!$image->validate()) {
+            $app->halt(400);
+        }
+
         $image->save();
-        $image->channels()->sync(array($app->request->post('channelName')));
+        //$image->channels()->sync(array($app->request->post('channelName')));
 
         $app->response->status(201);
         echo $image->toJson();
