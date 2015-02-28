@@ -17,13 +17,12 @@ class Image extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsToMany('Channel', 'channel_images', 'image_id', 'channel_name');
     }
 
-    public function save() {
+    public function save(array $options = array()) {
         if ($this->validate()) {
-            parent::save();
-            return true;
+            return parent::save($options);
         }
 
-        return false;
+        return null;
     }
 
     public function scopeSort($query, $sort) {

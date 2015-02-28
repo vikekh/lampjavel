@@ -6,9 +6,7 @@ $app->group('/images', function () use ($app) {
 
     $app->post('/', function () use ($app) {
         $image = new \Image;
-        $image->url = $app->request->post('url');
-        $image->created = null;
-        $image->updated = null;
+        $image->fill($app->request->params());
 
         if (!$image->save()) {
             $app->halt(400);
