@@ -1,10 +1,6 @@
 <?php
 
-use Eloquence\Database\Traits\CamelCaseModel;
-
-class Image extends \Illuminate\Database\Eloquent\Model {
-    use CamelCaseModel;
-    
+class Image extends Model {
     protected $fillable = array('url');
     protected $hidden = array(
         'pivot',
@@ -15,14 +11,6 @@ class Image extends \Illuminate\Database\Eloquent\Model {
 
     public function channels() {
         return $this->belongsToMany('Channel', 'channel_images', 'image_id', 'channel_name');
-    }
-
-    public function save(array $options = array()) {
-        if ($this->validate()) {
-            return parent::save($options);
-        }
-
-        return null;
     }
 
     public function scopeSort($query, $sort) {
