@@ -1,6 +1,12 @@
 <?php
 
+use \Eloquence\Database\Traits\CamelCaseModel;
+use \Illuminate\Database\Eloquent\Model;
+
 class Image extends Model {
+    use CamelCaseModel;
+    use Validation;
+
     protected $fillable = array('url');
     protected $hidden = array(
         'pivot',

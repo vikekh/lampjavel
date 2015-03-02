@@ -1,10 +1,6 @@
 <?php
 
-use Eloquence\Database\Traits\CamelCaseModel;
-
-abstract class Model extends \Illuminate\Database\Eloquent\Model {
-    use CamelCaseModel;
-
+trait Validation {
     public function save(array $options = array()) {
         if ($this->validate()) {
             return parent::save($options);
