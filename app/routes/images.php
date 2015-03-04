@@ -1,11 +1,13 @@
 <?php
 
+use \Vikekh\Lampjavel\Api\Models\Image as Image;
+
 $app->group('/images', function () use ($app) {
 
     // create
 
     $app->post('/', function () use ($app) {
-        $image = new \Image;
+        $image = new Image;
         $image->fill($app->request->params());
 
         if (!$image->save()) {
@@ -19,7 +21,7 @@ $app->group('/images', function () use ($app) {
     // read
 
     $app->get('/:id', function ($id) use ($app) {
-        $image = \Image::find(intval($id));
+        $image = Image::find(intval($id));
 
         echo $image->toJson();
     });

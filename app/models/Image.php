@@ -1,11 +1,14 @@
 <?php
 
-use \Eloquence\Database\Traits\CamelCaseModel;
-use \Illuminate\Database\Eloquent\Model;
+namespace Vikekh\Lampjavel\Api\Models;
+
+use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
+use \Illuminate\Database\Eloquent\Model as Model;
+use \Vikekh\Lampjavel\Api\Models\Traits\ValidationTrait;
 
 class Image extends Model {
-    use CamelCaseModel;
-    use Validation;
+    use CamelCaseTrait;
+    use ValidationTrait;
 
     protected $fillable = array('url');
     protected $hidden = array(
