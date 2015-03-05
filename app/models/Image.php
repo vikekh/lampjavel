@@ -4,10 +4,12 @@ namespace Vikekh\Lampjavel\Api\Models;
 
 use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
 use \Illuminate\Database\Eloquent\Model as Model;
+use \Vikekh\Lampjavel\Api\Models\Traits\SortingTrait;
 use \Vikekh\Lampjavel\Api\Models\Traits\ValidationTrait;
 
 class Image extends Model {
     use CamelCaseTrait;
+    use SortingTrait;
     use ValidationTrait;
 
     protected $fillable = array('url');
@@ -20,24 +22,6 @@ class Image extends Model {
 
     public function channels() {
         return $this->belongsToMany('Channel', 'channel_images', 'image_id', 'channel_name');
-    }
-
-    public function scopeSort($query, $sort) {
-        switch ($sort) {
-            case 'asc':
-            case 'desc':
-                return $query->orderBy('id', $sort);
-                break;
-
-            case 'rand':
-            case 'random':
-                return $query->orderByRaw('rand()');
-                break;
-            
-            default:
-                return $query;
-                break;
-        }
     }
 
     public function validate() {
