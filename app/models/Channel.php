@@ -1,21 +1,22 @@
 <?php
 
-use Eloquence\Database\Traits\CamelCaseModel;
+namespace Vikekh\Lampjavel\Api\Models;
+
+use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
+use \Illuminate\Database\Eloquent\Model as Model;
 
 class Channel extends \Illuminate\Database\Eloquent\Model {
-    use CamelCaseModel;
+    use CamelCaseTrait;
 
     protected $fillable = array(
-        'name',
-        'public'
+        'id',
+        'is_public'
     );
     protected $hidden = array(
         'pivot',
-        'pivot_channel_name',
+        'pivot_channel_id',
         'pivot_image_id'
     );
-    public $primaryKey = 'name';
-    public $timestamps = false;
 
     public function images() {
         return $this->belongsToMany('Image', 'channel_images', 'channel_name', 'image_id');

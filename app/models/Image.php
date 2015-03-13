@@ -15,10 +15,9 @@ class Image extends Model {
     protected $fillable = array('url');
     protected $hidden = array(
         'pivot',
-        'pivot_channel_name',
+        'pivot_channel_id',
         'pivot_image_id'
     );
-    public $timestamps = false;
 
     public function channels() {
         return $this->belongsToMany('Channel', 'channel_images', 'image_id', 'channel_name');
