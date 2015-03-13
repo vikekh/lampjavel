@@ -4,7 +4,17 @@ use \Vikekh\Lampjavel\Api\Models\Image as Image;
 
 $app->group('/images', function () use ($app) {
 
-    // create
+    // GET /images
+
+    // GET /images/{imageId}
+
+    $app->get('/:id', function ($id) use ($app) {
+        $image = Image::find(intval($id));
+
+        echo $image->toJson();
+    });
+
+    // POST /images
 
     $app->post('/', function () use ($app) {
         $image = new Image;
@@ -18,16 +28,8 @@ $app->group('/images', function () use ($app) {
         echo $image->toJson();
     });
 
-    // read
+    // PUT /images/{imageId}
 
-    $app->get('/:id', function ($id) use ($app) {
-        $image = Image::find(intval($id));
-
-        echo $image->toJson();
-    });
-
-    // update
-
-    // delete
+    // DELETE /images/{imageId}
 
 });
