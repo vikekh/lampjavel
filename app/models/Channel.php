@@ -20,6 +20,6 @@ class Channel extends Model {
     public $incrementing = false;
 
     public function images() {
-        return $this->belongsToMany('Image', 'channel_images', 'channel_name', 'image_id');
+        return $this->belongsToMany('Vikekh\Lampjavel\Api\Models\Image', 'channel_images', 'channel_id', 'image_id');
     }
 }

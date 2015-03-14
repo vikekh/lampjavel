@@ -29,6 +29,14 @@ $app->group('/channels', function () use ($app) {
 
     // PUT /channels/{channelId}/images/{imageId}
 
+    $app->put('/:channelId/images/:imageId', function ($channelId, $imageId) use ($app) {
+        $channel = Channel::find($channelId);
+        $image = Image::find(intval($imageId));
+        $channel->images()->attach($image->id);
+
+        $app->response->status(200);
+    });
+
     // DELETE /channels/{channelId}
 
 });
