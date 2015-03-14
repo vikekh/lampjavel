@@ -11,6 +11,19 @@ $app->group('/channels', function () use ($app) {
 
     // GET /channels/{channelId}/images
 
+    $app->get('/:channelId/images', function ($channelId) use ($app) {
+        $params = $app->request->params();
+        $channel = Channel::find($channelId);
+        $images = $channel->images();
+
+        $images->sort($params['sort']);
+        $images->skip(intval($params['offset']));
+        $images->take(intval($params['limit']));
+
+        $app->response->status(200);
+        echo $images->get()->toJson();
+    });
+
     // POST /channels
 
     $app->post('/', function () use ($app) {

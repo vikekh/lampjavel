@@ -4,9 +4,11 @@ namespace Vikekh\Lampjavel\Api\Models;
 
 use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
 use \Illuminate\Database\Eloquent\Model as Model;
+use \Vikekh\Lampjavel\Api\Models\Traits\SortingTrait;
 
 class Channel extends Model {
     use CamelCaseTrait;
+    use SortingTrait;
 
     protected $fillable = array(
         'id',
