@@ -13,6 +13,18 @@ $app->group('/channels', function () use ($app) {
 
     // POST /channels
 
+    $app->post('/', function () use ($app) {
+        $channel = new Channel;
+        $channel->fill($app->request->params());
+
+        if (!$channel->save()) {
+            $app->halt(400);
+        }
+
+        $app->response->status(201);
+        echo $channel->toJson();
+    });
+
     // PUT /channels/{channelId}
 
     // PUT /channels/{channelId}/images/{imageId}

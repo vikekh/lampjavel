@@ -17,8 +17,7 @@ $app->group('/images', function () use ($app) {
     // POST /images
 
     $app->post('/', function () use ($app) {
-        $image = new Image;
-        $image->fill($app->request->params());
+        $image = new Image($app->request->params());
 
         if (!$image->save()) {
             $app->halt(400);
