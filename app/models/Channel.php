@@ -21,6 +21,11 @@ class Channel extends Model {
     );
     public $incrementing = false;
 
+    public function __construct(array $attributes = array()) {
+        $this->isPublic = true;
+        parent::__construct($attributes);
+    }
+
     public function images() {
         return $this->belongsToMany('Vikekh\Lampjavel\Api\Models\Image', 'channel_images', 'channel_id', 'image_id');
     }
