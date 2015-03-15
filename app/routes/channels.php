@@ -1,6 +1,5 @@
 <?php
 
-use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Vikekh\Lampjavel\Api\Models\Channel as Channel;
 use \Vikekh\Lampjavel\Api\Models\Image as Image;
 
@@ -44,16 +43,13 @@ $app->group('/channels', function () use ($app) {
     // PUT /channels/{channelId}/images/{imageId}
 
     $app->put('/:channelId/images/:imageId', function ($channelId, $imageId) use ($app) {
-        try {
-            $channel = Channel::findOrFail($channelId);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Channel id "' + $channelId + '" does not exist.');
-        }
+        $channel = Channel::find($channelId);
+        $image = Image::find($imageId);
 
-        try {
-            $image = Image::findOrFail($imageId);
-        } catch (ModelNotFoundException $e) {
-            throw new \Exception('Image id "' + $imageId + '" does not exist.');
+        if ($channel === null) {
+            $app->halt(400, 'Channel "' . $channelId . '" does not exist.');
+        } else if ($image === null) {
+            $app->halt(400, 'Image "' . $imageId . '" does not exist.');
         }
 
         $channel->images()->attach($image->id);
