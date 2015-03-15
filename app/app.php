@@ -13,7 +13,7 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 $app = new \Slim\Slim(array(
-    'debug' => true,
+    'debug' => false,
     'mode' => 'development'
 ));
 
