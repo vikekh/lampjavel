@@ -4,12 +4,12 @@ namespace Vikekh\Lampjavel\Api\Models;
 
 use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
 use \Illuminate\Database\Eloquent\Model as Model;
-use \Vikekh\Lampjavel\Api\Models\Traits\SortingTrait;
+use \Vikekh\Lampjavel\Api\Models\Traits\FilterTrait;
 use \Vikekh\Lampjavel\Api\Models\Traits\ValidationTrait;
 
 class Image extends Model {
     use CamelCaseTrait;
-    use SortingTrait;
+    use FilterTrait;
     use ValidationTrait;
 
     protected $fillable = array('url');
