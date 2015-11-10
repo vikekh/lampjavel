@@ -23,17 +23,15 @@ trait FilterTrait {
         switch ($sort) {
             case 'asc':
             case 'desc':
-                return $query->orderBy('id', $sort);
+                $query->orderBy('id', $sort);
                 break;
 
             case 'rand':
             case 'random':
-                return $query->orderByRaw('rand()');
-                break;
-            
-            default:
-                return $query;
+                $query->orderByRaw('rand()');
                 break;
         }
+
+        return $query;
     }
 }
