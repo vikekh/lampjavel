@@ -20,7 +20,8 @@ class Image extends Model {
     );
 
     public function channels() {
-        return $this->belongsToMany('Vikekh\Lampjavel\Api\Models\Channel', 'channel_images', 'image_id', 'channel_id');
+        return $this->belongsToMany('Vikekh\Lampjavel\Api\Models\Channel', 'channel_images',
+            'image_id', 'channel_id');
     }
 
     public function validate() {
