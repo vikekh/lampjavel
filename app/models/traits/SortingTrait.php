@@ -3,22 +3,24 @@
 trait SortingTrait {
     public function scopeSort($query, array $params) {
         $sort = null;
-
+        $sortValues = array('asc', 'ascending', 'desc', 'descending', 'rand', 'random');
         $sortKey = 'sort';
 
-        //if (array_key_exists($sortKey, $params) && !empty($params[$sortKey]) &&
-        //        is_numeric($params[$pageNumberKey]) && intval($params[$pageNumberKey]) >= 0) {
+        if (array_key_exists($sortKey, $params) && !empty($params[$sortKey]) &&
+                in_array(strtolower($params[$sortKey]), $sortValues)) {
+            $sort = strtolower($params[$sortKey]);
+        }
 
-        switch ($sort) {
-            case 'asc':
-            case 'desc':
-                $query->orderBy('id', $sort);
-                break;
+        if ($sort === 'asc' || $sort === 'ascending') {
+            $query->orderBy('id', 'asc');
+        }
 
-            case 'rand':
-            case 'random':
-                $query->orderByRaw('rand()');
-                break;
+        if ($sort === 'desc' || $sort === 'descending') {
+            $query->orderBy('id', 'desc');
+        }
+
+        if ($sort === 'rand' || $sort === 'random') {
+            $query->orderByRaw('rand()');
         }
 
         return $query;

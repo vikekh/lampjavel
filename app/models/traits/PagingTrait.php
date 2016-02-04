@@ -4,7 +4,6 @@ trait PagingTrait {
     public function scopePage($query, array $params) {
         $pageNumber = 0;
         $pageSize = 0;
-
         $pageNumberKey = 'pageNumber';
         $pageSizeKey = 'pageSize';
 

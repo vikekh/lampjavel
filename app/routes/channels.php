@@ -14,7 +14,7 @@ $app->group('/channels', function () use ($app) {
     $app->get('/:channelId/images', function ($channelId) use ($app) {
         $params = $app->request->params();
         $channel = Channel::find($channelId);
-        $images = $channel->images()->filter($params);
+        $images = $channel->images()->page($params)->sort($params);
 
         $app->response->status(200);
         echo $images->get()->toJson();

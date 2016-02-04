@@ -1,6 +1,4 @@
-<?php
-
-namespace Vikekh\Lampjavel\Api\Models\Traits;
+<?php namespace Vikekh\Lampjavel\Api\Models\Traits;
 
 trait ValidatingTrait {
     public function save(array $options = array()) {

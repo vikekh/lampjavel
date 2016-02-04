@@ -4,11 +4,15 @@ namespace Vikekh\Lampjavel\Api\Models;
 
 use \Eloquence\Database\Traits\CamelCaseModel as CamelCaseTrait;
 use \Illuminate\Database\Eloquent\Model as Model;
-use \Vikekh\Lampjavel\Api\Models\Traits\FilterTrait;
+use \Vikekh\Lampjavel\Api\Models\Traits\PagingTrait;
+use \Vikekh\Lampjavel\Api\Models\Traits\SortingTrait;
+use \Vikekh\Lampjavel\Api\Models\Traits\ValidatingTrait;
 
 class Channel extends Model {
     use CamelCaseTrait;
-    use FilterTrait;
+    use PagingTrait;
+    use SortingTrait;
+    use ValidatingTrait;
 
     protected $fillable = array(
         'id',
@@ -30,4 +34,8 @@ class Channel extends Model {
         return $this->belongsToMany('Vikekh\Lampjavel\Api\Models\Image', 'channel_images',
             'channel_id', 'image_id');
     }
+
+    public function validate() {
+        return true;
+    } 
 }
