@@ -1,8 +1,6 @@
-<?php
+<?php namespace Vikekh\Lampjavel\Api\Models\Traits;
 
-namespace Vikekh\Lampjavel\Api\Models\Traits;
-
-trait ValidationTrait {
+trait ValidatingTrait {
     public function save(array $options = array()) {
         if ($this->validate()) {
             return parent::save($options);

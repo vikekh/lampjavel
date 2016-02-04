@@ -26,11 +26,11 @@
                 }
 
                 var id = getParameterByName('id');
-                var offset = getParameterByName('offset') || 0;
+                var offset = getParameterByName('pageNumber') || 0;
                 var channel = getParameterByName('channel') || 'lampjavel';
                 var random = getParameterByName('random');
                 var timeout = 1000*parseInt(getParameterByName('timeout')) || null;
-                var params = random ? 'sort=random&offset=0' : 'sort=desc&offset=' + offset;
+                var params = random ? 'sort=random&pageNumber=0' : 'sort=desc&pageNumber=' + offset;
 
                 if (id != null) {
                     $.ajax({
@@ -43,7 +43,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: 'http://localhost/lampjavel/api/channels/' + channel + '/images?limit=1&' + params,
+                        url: 'http://localhost/lampjavel/api/channels/' + channel + '/images?pageSize=1&' + params,
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
@@ -56,7 +56,7 @@
                     if (id || random) {
                         location.reload();
                     } else {
-                        location.href = 'demo?channel=' + channel + '&offset=' + (parseInt(offset) + 1);
+                        location.href = 'demo?channel=' + channel + '&pageNumber=' + (parseInt(offset) + 1);
                     }
                 });
                 
