@@ -23,8 +23,9 @@ $app->group('/channels', function () use ($app) {
     // POST /channels
 
     $app->post('/', function () use ($app) {
+        $params = $app->request->params();
         $channel = new Channel;
-        $channel->fill($app->request->params());
+        $channel->fill($params);
 
         if (!$channel->save()) {
             $app->halt(400);

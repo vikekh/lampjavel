@@ -8,8 +8,12 @@ $app->group('/images', function () use ($app) {
 
     // GET /images/{imageId}
 
-    $app->get('/:id', function ($id) use ($app) {
-        $image = Image::find(intval($id));
+    $app->get('/:id', function ($imageId) use ($app) {
+        $image = Image::find($imageId);
+
+        if ($image === null) {
+            $app->halt(400, 'Image "' . $imageId . '" does not exist.');
+        }
 
         echo $image->toJson();
     });
@@ -17,7 +21,8 @@ $app->group('/images', function () use ($app) {
     // POST /images
 
     $app->post('/', function () use ($app) {
-        $image = new Image($app->request->params());
+        $params = $app->request->params();
+        $image = new Image($params);
 
         if (!$image->save()) {
             $app->halt(400);
