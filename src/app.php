@@ -12,7 +12,7 @@ $capsule->addConnection($config['database']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$app = new \Slim\Slim(array(
+$app = new \Slim\App(array(
     'debug' => false,
     'mode' => 'development'
 ));
