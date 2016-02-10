@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
-require '../app/config/database.php';
+require '../src/config/database.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -21,8 +21,8 @@ $app->get('/', function () use ($app) {
     echo '/';
 });
 
-require '../app/routes/channels.php';
-require '../app/routes/images.php';
+require '../src/routes/channels.php';
+require '../src/routes/images.php';
 
 $app->error(function (\Exception $e) use ($app) {
     $app->status(400);
