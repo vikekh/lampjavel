@@ -3,7 +3,7 @@
 use \Vikekh\Lampjavel\Api\Models\Channel as Channel;
 use \Vikekh\Lampjavel\Api\Models\Image as Image;
 
-$app->group('/channels', function () use ($app) {
+$app->group('/channels', function () {
 
     // GET /channels
 
@@ -11,19 +11,20 @@ $app->group('/channels', function () use ($app) {
 
     // GET /channels/{channelId}/images
 
-    $app->get('/:channelId/images', function ($channelId) use ($app) {
-        $params = $app->request->params();
-        $channel = Channel::find($channelId);
+    $this->get('/{channelId}/images', function ($req, $res, $args = []) {
+    //$app->get('', function ($channelId) use ($app) {
+        $params = $req->getQueryParams();
+        $channel = Channel::find($args['channelId']);
         $images = $channel->images()->page($params)->sort($params);
 
-        $app->response->status(200);
+        //$res->status(200);
         echo $images->get()->toJson();
     });
 
     // POST /channels
 
-    $app->post('/', function () use ($app) {
-        $params = $app->request->params();
+    $this->post('/', function (Request $req,  Response $res, $args = []) {
+        $params = $req->params();
         $channel = new Channel;
         $channel->fill($params);
 
@@ -31,7 +32,7 @@ $app->group('/channels', function () use ($app) {
             $app->halt(400);
         }
 
-        $app->response->status(201);
+        $res->status(201);
         echo $channel->toJson();
     });
 
@@ -39,14 +40,14 @@ $app->group('/channels', function () use ($app) {
 
     // PUT /channels/{channelId}/images/{imageId}
 
-    $app->put('/:channelId/images/:imageId', function ($channelId, $imageId) use ($app) {
-        $channel = Channel::find($channelId);
-        $image = Image::find($imageId);
+    $this->put('/{channelId}/images/{imageId}', function (Request $req,  Response $res, $args = []) {
+        $channel = Channel::find($args['channelId']);
+        $image = Image::find($args['imageId']);
 
         if ($channel === null) {
-            $app->halt(400, 'Channel "' . $channelId . '" does not exist.');
+            $app->halt(400, 'Channel "' . $args['channelId'] . '" does not exist.');
         } else if ($image === null) {
-            $app->halt(400, 'Image "' . $imageId . '" does not exist.');
+            $app->halt(400, 'Image "' . $args['imageId'] . '" does not exist.');
         }
 
         $channel->images()->attach($image->id);

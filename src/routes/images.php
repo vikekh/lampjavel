@@ -2,17 +2,17 @@
 
 use \Vikekh\Lampjavel\Api\Models\Image as Image;
 
-$app->group('/images', function () use ($app) {
+$app->group('/images', function () {
 
     // GET /images
 
     // GET /images/{imageId}
 
-    $app->get('/:id', function ($imageId) use ($app) {
-        $image = Image::find($imageId);
+    $this->get('/{imageId}', function (Request $req,  Response $res, $args = []) {
+        $image = Image::find($args['imageId']);
 
         if ($image === null) {
-            $app->halt(400, 'Image "' . $imageId . '" does not exist.');
+            $app->halt(400, 'Image "' . $args['imageId'] . '" does not exist.');
         }
 
         echo $image->toJson();
@@ -20,8 +20,8 @@ $app->group('/images', function () use ($app) {
 
     // POST /images
 
-    $app->post('/', function () use ($app) {
-        $params = $app->request->params();
+    $this->post('/', function (Request $req,  Response $res, $args = []) {
+        $params = $req->params();
         $image = new Image($params);
 
         if (!$image->save()) {
