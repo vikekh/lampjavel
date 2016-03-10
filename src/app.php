@@ -12,10 +12,13 @@ $capsule->addConnection($config['database']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$app = new \Slim\App(array(
+$app = new \Slim\App([
     'debug' => false,
-    'mode' => 'development'
-));
+    'mode' => 'development',
+    'settings' => [
+        'displayErrorDetails' => true,
+    ]
+]);
 
 $app->get('/', function (Request $req,  Response $res, $args = []) {
     echo '/';
