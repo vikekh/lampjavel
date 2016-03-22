@@ -18,7 +18,7 @@ $app->get('/channels/{channelId}/images', function ($request, $response, $args =
 
 // POST /channels
 $app->post('/channels', function ($request, $response, $args = []) {
-    $params = $request->getQueryParams();
+    $params = $request->getParsedBody();
     $channel = new Channel;
     $channel->fill($params);
 

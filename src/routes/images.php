@@ -17,7 +17,7 @@ $app->get('/images/{imageId}', function ($request, $response, $args = []) {
 
 // POST /images
 $app->post('/images', function ($request, $response, $args = []) {
-    $params = $request->getQueryParams();
+    $params = $request->getParsedBody();
     $image = new Image($params);
 
     if (!$image->save()) {
