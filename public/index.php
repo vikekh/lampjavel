@@ -1,3 +1,3 @@
 <?php
 
-require '../app/app.php';
+require '../src/app.php';
