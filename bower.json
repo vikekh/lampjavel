@@ -1,0 +1,22 @@
+{
+  "name": "lampjavel",
+  "homepage": "https://github.com/vikekh/lampjavel",
+  "authors": [
+    "vikekh"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Durandal": "durandal#^2.1.0"
+  }
+}
