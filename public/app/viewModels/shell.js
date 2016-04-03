@@ -4,14 +4,14 @@
         activate: function () {
             router.map([
                 {
-                    route: '',
+                    route: 'home',
                     title: 'Lampja:vel',
                     moduleId: 'viewModels/home',
                     nav: true
                 }
             ]).buildNavigationModel();
             
-            return router.activate();
+            return router.activate('home');
         }
     };
 });
