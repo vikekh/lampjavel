@@ -1,9 +1,7 @@
-﻿define(function() {
-    function viewModel() {
-        var self = this;
+﻿define(['knockout'], function (ko) {
+	return {
+        activate: function () {
 
-        self.channelId = ko.observable();
-    }
-
-    return viewModel;
+        }
+    };
 });
