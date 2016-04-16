@@ -8,7 +8,7 @@
             router.map([
                 {
                     route: '',
-                    title: 'Lampja:vel',
+                    title: 'Home',
                     moduleId: 'viewModels/home',
                     nav: true
                 }
