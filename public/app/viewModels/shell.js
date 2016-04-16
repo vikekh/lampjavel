@@ -7,14 +7,15 @@
         activate: function () {
             router.map([
                 {
-                    route: '',
+                    route: ':channelId',
                     title: 'Home',
                     moduleId: 'viewModels/home',
-                    nav: true
+                    nav: true,
+                    hash: 'index'
                 }
             ]).buildNavigationModel();
             
-            return router.activate();
+            return router.activate('#index/' + this.channelId());
         }
     };
 });

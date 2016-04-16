@@ -2,9 +2,10 @@
 	return {
 		imageUrl: ko.observable(),
 
-        activate: function () {
+        activate: function (channelId) {
         	var self = this;
-        	var channelId = shell.channelId();
+        	//var channelId = shell.channelId();
+        	debugger;
 
         	return $.ajax({
         		url: 'http://lampjavel.local/api/channels/' + channelId + '/images',
