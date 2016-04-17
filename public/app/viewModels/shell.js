@@ -5,17 +5,14 @@
         router: router,
 
         activate: function () {
-            router.map([
-                {
-                    route: ':channelId',
-                    title: 'Home',
-                    moduleId: 'viewModels/home',
-                    nav: true,
-                    hash: 'index'
-                }
-            ]).buildNavigationModel();
+            router.map([{
+                route: '(:channelId)',
+                title: 'Welcome',
+                moduleId: 'viewModels/index',
+                nav: true
+            }]).buildNavigationModel();
             
-            return router.activate('#index/' + this.channelId());
+            return router.activate();
         }
     };
 });

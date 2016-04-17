@@ -4,8 +4,10 @@
 
         activate: function (channelId) {
         	var self = this;
-        	//var channelId = shell.channelId();
-        	debugger;
+
+        	if (!channelId) {
+        		channelId = 'lampjavel';
+        	}
 
         	return $.ajax({
         		url: 'http://lampjavel.local/api/channels/' + channelId + '/images',
