@@ -1,5 +1,9 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app, ko) {
     return {
+        changeChannel: function () {
+            app.trigger('channelChange');
+        },
+
         channelId: ko.observable('lampjavel'),
 
         router: router,

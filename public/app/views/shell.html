@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="page-header">
-            <input class="form-control input-lg" type="text" data-bind="value: channelId">
+            <input class="form-control input-lg" type="text" data-bind="value: channelId, event: { change: changeChannel }">
         </div>
     </div>
     <div class="page-host" data-bind="router: { transition: 'entrance' }"></div>
