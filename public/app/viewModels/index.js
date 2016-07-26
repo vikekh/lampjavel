@@ -8,7 +8,7 @@
             var self = this;
             
             self.pageNumber(self.pageNumber() + 1);
-            dataService.getImages(shell.channelId(), 1, this.pageNumber()).done(function (response) {
+            dataService.getRandomImages(shell.channelId(), 1, this.pageNumber()).done(function (response) {
                 self.imageUrl(response[0].url);
             });
         },
@@ -22,12 +22,12 @@
 
             app.on('channelContext', function (channelId) {
                 self.pageNumber(1);
-                dataService.getImages(shell.channelId(), 1, self.pageNumber()).done(function (response) {
+                dataService.getRandomImages(shell.channelId(), 1, self.pageNumber()).done(function (response) {
                     self.imageUrl(response[0].url);
                 });
             });
 
-        	return dataService.getImages(shell.channelId(), 1, self.pageNumber()).done(function (response) {
+        	return dataService.getRandomImages(shell.channelId(), 1, self.pageNumber()).done(function (response) {
         		self.imageUrl(response[0].url);
         	});
         }

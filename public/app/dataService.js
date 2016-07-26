@@ -13,6 +13,19 @@ define(['jquery'], function ($) {
                 url: url,
                 dataType: 'json'
             });
-		}
+		},
+
+        getRandomImages: function (channelId, pageSize) {
+            var url = basePath + '/channels/' + channelId + '/images?sort=random';
+
+            if (typeof pageSize === 'number')  {
+                url += '&pageSize=' + pageSize;
+            }
+
+            return $.ajax({
+                url: url,
+                dataType: 'json'
+            });
+        }
 	};
 });

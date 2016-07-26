@@ -5,7 +5,7 @@
         'plugins' : '../vendor/durandal/js/plugins',
         'transitions' : '../vendor/durandal/js/transitions',
         'knockout': '../vendor/knockout.js/knockout',
-        'bootstrap': '../vendor/bootstrap/js/bootstrap',
+        'bootstrap': '../vendor/bootstrap/dist/js/bootstrap',
         'jquery': '../vendor/jquery/jquery.min'
     },
     shim: {
