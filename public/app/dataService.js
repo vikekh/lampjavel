@@ -2,30 +2,20 @@ define(['jquery'], function ($) {
 	var basePath = 'http://lampjavel.local/api';
 
 	return {
-		getImages: function (channelId, pageSize, pageNumber) {
+		getImages: function (channelId, pageSize, pageNumber, sort) {
 			var url = basePath + '/channels/' + channelId + '/images';
+            var params = {
+                pageSize: pageSize,
+                pageNumber: pageNumber,
+                sort: sort
+            };
 
-			if (typeof pageSize === 'number' && typeof pageNumber === 'number')  {
-				url += '?pageSize=' + pageSize + '&pageNumber=' + pageNumber;
-			}
+            url += '?' + $.param(params);
 
 			return $.ajax({
                 url: url,
                 dataType: 'json'
             });
-		},
-
-        getRandomImages: function (channelId, pageSize) {
-            var url = basePath + '/channels/' + channelId + '/images?sort=random';
-
-            if (typeof pageSize === 'number')  {
-                url += '&pageSize=' + pageSize;
-            }
-
-            return $.ajax({
-                url: url,
-                dataType: 'json'
-            });
-        }
+		}
 	};
 });
