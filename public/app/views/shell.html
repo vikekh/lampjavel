@@ -29,4 +29,7 @@
         </div>
     </div>
 </nav>
-<div class="page-host container" style="padding: 40px 15px;" data-bind="router: { transition: 'entrance' }"></div>
+<div class="container" style="padding: 40px 15px;">
+    <h1 data-bind="text: '#' + channelId()"></h1>
+    <div class="page-host" data-bind="router: { transition: 'entrance' }"></div>
+</div>
