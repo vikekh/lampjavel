@@ -20,6 +20,9 @@
         		channelId = 'lampjavel';
         	}
 
+            shell.channelId(channelId);
+            shell.header('#' + channelId);
+
             app.on('channelContext', function (channelId) {
                 self.pageNumber(undefined);
                 dataService.getNextImage(shell.channelId()).done(function (response) {

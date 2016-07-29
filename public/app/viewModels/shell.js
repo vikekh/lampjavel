@@ -1,22 +1,30 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app, ko) {
     return {
         changeChannel: function () {
-            app.trigger('channelContext', this.channelId());
+            //app.trigger('channelContext', this.channelId());
+            router.navigate('#' + this.channelId())
         },
 
-        channelId: ko.observable('lampjavel'),
+        channelId: ko.observable(),
+
+        header: ko.observable(),
 
         router: router,
 
         activate: function () {
             router.map([
                 {
-                    route: '(:channelId)',
+                    route: '',
                     title: 'Home',
-                    moduleId: 'viewModels/index',
+                    moduleId: 'viewModels/home/index',
                     nav: true
                 },
-
+                {
+                    route: ':channelId',
+                    title: 'Home',
+                    moduleId: 'viewModels/channels/viewer',
+                    nav: true
+                }
             ]).buildNavigationModel();
             
             return router.activate();
