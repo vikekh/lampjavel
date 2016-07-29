@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "Durandal": "durandal#^2.1.0",
+    "durandal": "durandal#^2.1.0",
     "bootstrap": "^3.3.6"
   }
 }
