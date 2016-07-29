@@ -5,6 +5,12 @@ use \Vikekh\Lampjavel\Api\Models\Image as Image;
 
 // GET /channels
 
+$app->get('/channels', function ($request, $response, $args = []) {
+    $channels = Channel::all();
+
+    echo $channels->toJson();
+});
+
 // GET /channels/{channelId}
 
 // GET /channels/{channelId}/images

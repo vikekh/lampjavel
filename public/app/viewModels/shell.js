@@ -2,7 +2,7 @@
     return {
         changeChannel: function () {
             //app.trigger('channelContext', this.channelId());
-            router.navigate('#' + this.channelId())
+            router.navigate('#channels/' + this.channelId())
         },
 
         channelId: ko.observable(),
@@ -20,8 +20,13 @@
                     nav: true
                 },
                 {
-                    route: ':channelId',
-                    title: 'Home',
+                    route: 'channels',
+                    title: 'Channels',
+                    moduleId: 'viewModels/channels/index',
+                    nav: true
+                },
+                {
+                    route: 'channels/:channelId',
                     moduleId: 'viewModels/channels/viewer',
                     nav: true
                 }
