@@ -16,6 +16,14 @@ $app->get('/channels/{channelId}/images', function ($request, $response, $args =
     echo $images->get()->toJson();
 });
 
+// GET /channels/{channelId}/nextImage
+$app->get('/channels/{channelId}/nextImage', function ($request, $response, $args = []) {
+    $channel = Channel::find($args['channelId']);
+    $images = $channel->images();
+
+    echo $images->orderByRaw('rand()')->first()->toJson();
+});
+
 // POST /channels
 $app->post('/channels', function ($request, $response, $args = []) {
     $params = $request->getParsedBody();

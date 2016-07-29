@@ -8,8 +8,8 @@
             var self = this;
             
             self.pageNumber(undefined);
-            dataService.getImages(shell.channelId(), 1, this.pageNumber(), 'random').done(function (response) {
-                self.imageUrl(response[0].url);
+            dataService.getNextImage(shell.channelId()).done(function (response) {
+                self.imageUrl(response.url);
             });
         },
 
@@ -22,13 +22,13 @@
 
             app.on('channelContext', function (channelId) {
                 self.pageNumber(undefined);
-                dataService.getImages(shell.channelId(), 1, self.pageNumber(), 'random').done(function (response) {
-                    self.imageUrl(response[0].url);
+                dataService.getNextImage(shell.channelId()).done(function (response) {
+                    self.imageUrl(response.url);
                 });
             });
 
-        	return dataService.getImages(shell.channelId(), 1, self.pageNumber(), 'random').done(function (response) {
-        		self.imageUrl(response[0].url);
+        	return dataService.getNextImage(shell.channelId()).done(function (response) {
+        		self.imageUrl(response.url);
         	});
         }
     };
