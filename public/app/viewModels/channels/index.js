@@ -1,25 +1,32 @@
-define(['durandal/app', 'jquery', 'knockout', 'dataService', 'viewModels/shell'], function (app, $, ko, dataService, shell) {
+define(function (require) {
+    var app = require('durandal/app');
+    var dataService = require('dataService');
+    var ko = require('knockout');
+    var shell = require('viewModels/shell');
+
     function Channel(data) {
         this.id = ko.observable(data.id);
+        this.imagesCount = ko.observable(data.imagesCount);
         this.isPublic = ko.observable(data.isPublic === 1);
-        this.url = ko.computed(function () {
-            return '#channels/' + this.id();
-        }, this);
     }
 
-    return {
-        activate: function (channelId) {
-            var self = this;
+    var viewModel = {};
 
-            shell.header('Channels');
+    viewModel.activate = function (channelId) {
+        var self = this;
 
-            return dataService.getChannels().done(function (response) {
-                for (var i = 0; i < response.length; i++) {
-                    self.channels.push(new Channel(response[i]));
-                }
-            });
-        },
+        shell.header('Channels');
 
-        channels: ko.observableArray([])
+        return dataService.getChannels().done(function (response) {
+            self.channels([]);
+
+            for (var i = 0; i < response.length; i++) {
+                self.channels.push(new Channel(response[i]));
+            }
+        });
     };
+
+    viewModel.channels = ko.observableArray([]);
+
+    return viewModel;
 });

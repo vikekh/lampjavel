@@ -2,14 +2,16 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Channel:</th>
+                <th>Channel</th>
+                <th>Number of images</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: channels">
             <tr>
                 <td>
-                    <a data-bind="attr: { href: url }, text: id"></a>
+                    <a data-bind="attr: { href: '#channels/' + id() }, text: id"></a>
                 </td>
+                <td data-bind="text: imagesCount">
             </tr>
         </tbody>
     </table>

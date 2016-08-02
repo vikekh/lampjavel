@@ -14,6 +14,9 @@ class Channel extends Model {
     use SortingTrait;
     use ValidatingTrait;
 
+    protected $appends = array(
+        'imagesCount'
+    );
     protected $fillable = array(
         'id',
         'isPublic'
@@ -28,6 +31,10 @@ class Channel extends Model {
     public function __construct(array $attributes = array()) {
         $this->isPublic = true;
         parent::__construct($attributes);
+    }
+
+    public function getImagesCountAttribute() {
+        return $this->images()->count();
     }
 
     public function images() {
