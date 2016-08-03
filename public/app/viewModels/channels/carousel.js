@@ -13,21 +13,39 @@ define(function (require) {
         shell.channelId(channelId);
         shell.header('#' + channelId);
 
-        app.on('channelContext', function (channelId) {
-            self.nextImage();
-        });
+        //app.on('channelContext', function (channelId) {
+            //self.nextImage();
+        //});
 
         return self.nextImage();
     };
 
-    viewModel.imageUrl = ko.observable();
+    viewModel.activeIndex = ko.observable(0);
+
+    viewModel.items = ko.observableArray([]);
+
+    viewModel.next = function () {
+        var self = this;
+
+        if (self.activeIndex() === self.items().length - 1) {
+            self.nextImage();
+        }
+
+        self.activeIndex(self.activeIndex() + 1);
+    };
 
     viewModel.nextImage = function () {
         var self = this;
 
         return dataService.getNextImage(shell.channelId()).done(function (response) {
-            self.imageUrl(response.url);
+            self.items.push(response);
         });
+    };
+
+    viewModel.previous = function () {
+        if (self.activeIndex() > 0) {
+            self.activeIndex(self.activeIndex() - 1);
+        }
     };
 
     return viewModel;
