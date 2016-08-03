@@ -27,7 +27,7 @@
                 },
                 {
                     route: 'channels/:channelId',
-                    moduleId: 'viewModels/channels/viewer',
+                    moduleId: 'viewModels/channels/carousel',
                     nav: true
                 }
             ]).buildNavigationModel();
