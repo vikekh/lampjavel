@@ -5,7 +5,7 @@
         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
     </ol>-->
     <div class="carousel-inner" role="listbox" data-bind="foreach: items">
-        <div class="item" data-bind="css: { active: true }">
+        <div class="item" data-bind="css: { active: $index() === $parent.activeIndex() }">
             <img alt="..." style="height: 855px; margin: auto;" data-bind="attr: { src: url }">
             <div class="carousel-caption"></div>
         </div>

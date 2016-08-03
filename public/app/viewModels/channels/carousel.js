@@ -27,7 +27,7 @@ define(function (require) {
     viewModel.next = function () {
         var self = this;
 
-        if (self.activeIndex() === self.items().length - 1) {
+        if (self.activeIndex() + 1 === self.items().length) {
             self.nextImage();
         }
 
@@ -43,6 +43,8 @@ define(function (require) {
     };
 
     viewModel.previous = function () {
+        var self = this;
+
         if (self.activeIndex() > 0) {
             self.activeIndex(self.activeIndex() - 1);
         }
