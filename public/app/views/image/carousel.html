@@ -6,7 +6,8 @@
     </ol>-->
     <div class="carousel-inner" role="listbox" data-bind="foreach: items">
         <div class="item" data-bind="css: { active: $index() === $parent.activeIndex() }">
-            <img alt="..." style="height: 855px; margin: auto;" data-bind="attr: { src: url }">
+            <!--<img alt="..." style="height: 855px; margin: auto;" data-bind="attr: { src: url }">-->
+            <div data-bind="compose: { model: 'viewModels/image/view', activationData: url }"></div>
             <div class="carousel-caption"></div>
         </div>
     </div>

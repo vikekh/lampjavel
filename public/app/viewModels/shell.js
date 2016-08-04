@@ -2,7 +2,7 @@
     return {
         changeChannel: function () {
             //app.trigger('channelContext', this.channelId());
-            router.navigate('#channels/' + this.channelId())
+            router.navigate('#channel/' + this.channelId())
         },
 
         channelId: ko.observable(),
@@ -20,14 +20,14 @@
                     nav: true
                 },
                 {
-                    route: 'channels',
+                    route: 'channel',
                     title: 'Channels',
-                    moduleId: 'viewModels/channels/index',
+                    moduleId: 'viewModels/channel/index',
                     nav: true
                 },
                 {
-                    route: 'channels/:channelId',
-                    moduleId: 'viewModels/channels/carousel',
+                    route: 'channel/:channelId',
+                    moduleId: 'viewModels/image/carousel',
                     nav: true
                 }
             ]).buildNavigationModel();
