@@ -1,23 +1,35 @@
-define(['jquery'], function ($) {
+define(function (require) {
+    var $ = require('jquery');
+
 	var basePath = 'http://lampjavel.local/api';
+    var dataService = {};
 
-	return {
-        getChannels: function () {
-            var url = basePath + '/channels';
+    dataService.getChannels = function () {
+        var url = basePath + '/channels';
 
-            return $.ajax({
-                url: url,
-                dataType: 'json'
-            });
-        },
+        return $.ajax({
+            url: url,
+            dataType: 'json'
+        });
+    };
 
-		getNextImage: function (channelId) {
-			var url = basePath + '/channels/' + channelId + '/nextImage';
+    dataService.getImages = function (channelId) {
+        var url = basePath + '/channels/' + channelId + '/images';
 
-			return $.ajax({
-                url: url,
-                dataType: 'json'
-            });
-		}
+        return $.ajax({
+            url: url,
+            dataType: 'json'
+        });
+    };
+
+	dataService.getNextImage = function (channelId) {
+		var url = basePath + '/channels/' + channelId + '/nextImage';
+
+		return $.ajax({
+            url: url,
+            dataType: 'json'
+        });
 	};
+
+    return dataService;
 });
