@@ -52,7 +52,7 @@
 
                 function postChannel(name) {
                     $.ajax({
-                        url: 'http://localhost/lampjavel/api/channels',
+                        url: 'http://lampjavel.local/api/channels',
                         type: 'POST',
                         data: {
                             id: name,
@@ -67,7 +67,7 @@
 
                 function postImage(channelName, image) {
                     $.ajax({
-                        url: 'http://localhost/lampjavel/api/images',
+                        url: 'http://lampjavel.local/api/images',
                         type: 'POST',
                         data: {
                             url: image
@@ -75,7 +75,7 @@
                         dataType: 'json',
                         success: function (data) {
                             $.ajax({
-                                url: 'http://localhost/lampjavel/api/channels/' + channelName + '/images/' + data.id,
+                                url: 'http://lampjavel.local/api/channels/' + channelName + '/images/' + data.id,
                                 type: 'PUT'
                             });
                         }
