@@ -45,12 +45,13 @@ define(function (require) {
         });
     };
 
-    dataService.getImagesFromChannel = function (channelId) {
+    dataService.getImagesFromChannel = function (channelId, data) {
         var url = basePath + '/channels/' + channelId + '/images';
 
         return $.ajax({
             url: url,
             type: 'GET',
+            data: data,
             dataType: 'json'
         });
     };

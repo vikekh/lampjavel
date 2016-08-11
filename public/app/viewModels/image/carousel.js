@@ -17,7 +17,9 @@ define(function (require) {
             //self.nextImage();
         //});
 
-        return self.nextImage();
+        return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
+            self.items(response);
+        });
     };
 
     viewModel.activeIndex = ko.observable(0);
@@ -27,19 +29,7 @@ define(function (require) {
     viewModel.next = function () {
         var self = this;
 
-        if (self.activeIndex() + 1 === self.items().length) {
-            self.nextImage();
-        }
-
         self.activeIndex(self.activeIndex() + 1);
-    };
-
-    viewModel.nextImage = function () {
-        var self = this;
-
-        return dataService.getImagesFromChannel(shell.channelId()).done(function (response) {
-            self.items.push(response[0]);
-        });
     };
 
     viewModel.previous = function () {
