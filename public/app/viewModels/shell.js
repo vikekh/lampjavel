@@ -1,7 +1,7 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app, ko) {
     return {
         changeChannel: function () {
-            //app.trigger('channelContext', this.channelId());
+            app.trigger('channelContext', this.channelId());
             router.navigate('#channel/' + this.channelId())
         },
 

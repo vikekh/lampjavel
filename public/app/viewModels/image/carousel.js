@@ -37,8 +37,8 @@ define(function (require) {
     viewModel.nextImage = function () {
         var self = this;
 
-        return dataService.getNextImage(shell.channelId()).done(function (response) {
-            self.items.push(response);
+        return dataService.getImagesFromChannel(shell.channelId()).done(function (response) {
+            self.items.push(response[0]);
         });
     };
 
