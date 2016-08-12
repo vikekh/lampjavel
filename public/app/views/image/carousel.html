@@ -4,10 +4,10 @@
         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
     </ol>-->
-    <div class="carousel-inner" role="listbox" data-bind="foreach: items">
-        <div class="item" data-bind="css: { active: $index() === $parent.activeIndex() }">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
             <!--<img alt="..." style="height: 855px; margin: auto;" data-bind="attr: { src: url }">-->
-            <div data-bind="compose: { model: 'viewModels/image/view', activationData: url }"></div>
+            <img class="img-responsive img-rounded" style="width: 100%;" data-bind="attr: { 'src': url }">
             <div class="carousel-caption"></div>
         </div>
     </div>

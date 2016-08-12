@@ -5,6 +5,7 @@ define(function (require) {
     var ko = require('knockout');
     var shell = require('viewModels/shell');
 
+    var images;
     var viewModel = {};
 
     viewModel.activate = function (channelId) {
@@ -18,18 +19,21 @@ define(function (require) {
         //});
 
         return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
-            self.items(response);
+            images = response;
+            self.url(images[self.activeIndex()].url);
         });
     };
 
     viewModel.activeIndex = ko.observable(0);
 
-    viewModel.items = ko.observableArray([]);
-
-    viewModel.next = function () {
+    viewModel.next = function () {debugger;
         var self = this;
 
-        self.activeIndex(self.activeIndex() + 1);
+        if (self.activeIndex() < images.length - 1) {
+            self.activeIndex(self.activeIndex() + 1);
+        }
+
+        self.url(images[self.activeIndex()].url);
     };
 
     viewModel.previous = function () {
@@ -38,7 +42,11 @@ define(function (require) {
         if (self.activeIndex() > 0) {
             self.activeIndex(self.activeIndex() - 1);
         }
+
+        self.url(images[self.activeIndex()].url);
     };
+
+    viewModel.url = ko.observable();
 
     return viewModel;
 });
