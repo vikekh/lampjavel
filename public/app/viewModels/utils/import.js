@@ -28,12 +28,21 @@ define(function (require) {
             var images = parse(reader.result);
 
             data = images;
+            import();
         }
     }
 
     function addFiles(files) {
         for (var i = 0; i < files.length; i++) {
             addFile(files[i]);
+        }
+    }
+
+    function import() {
+        for (var i = 0; i < data.length; i++) {
+            dataService.createImage({ url: data[i] }).done(function (data) {
+                dataService.addImageToChannel(shell.channelId(), data.id);
+            });
         }
     }
 
