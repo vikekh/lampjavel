@@ -5,48 +5,40 @@ define(function (require) {
     var ko = require('knockout');
     var shell = require('viewModels/shell');
 
-    var images;
-    var viewModel = {};
+    return {
+        activate: function (channelId) {
+            var self = this;
 
-    viewModel.activate = function (channelId) {
-        var self = this;
+            shell.channelId(channelId);
+            shell.header('#' + channelId);
 
-        shell.channelId(channelId);
-        shell.header('#' + channelId);
+            //app.on('channelContext', function (channelId) {
+                //self.nextImage();
+            //});
 
-        //app.on('channelContext', function (channelId) {
-            //self.nextImage();
-        //});
+            return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
+                self.items = response;
+            });
+        },
 
-        return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
-            images = response;
-            self.url(images[self.activeIndex()].url);
-        });
-    };
+        index: ko.observable(0),
 
-    viewModel.activeIndex = ko.observable(0);
+        items: ko.observableArray([]),
 
-    viewModel.next = function () {debugger;
-        var self = this;
+        next: function () {
+            var self = this;
 
-        if (self.activeIndex() < images.length - 1) {
-            self.activeIndex(self.activeIndex() + 1);
+            if (self.index() < self.items.length - 1) {
+                self.index(self.index() + 1);
+            }
+        },
+
+        previous: function () {
+            var self = this;
+
+            if (self.index() > 0) {
+                self.index(self.index() - 1);
+            }
         }
-
-        self.url(images[self.activeIndex()].url);
     };
-
-    viewModel.previous = function () {
-        var self = this;
-
-        if (self.activeIndex() > 0) {
-            self.activeIndex(self.activeIndex() - 1);
-        }
-
-        self.url(images[self.activeIndex()].url);
-    };
-
-    viewModel.url = ko.observable();
-
-    return viewModel;
 });
