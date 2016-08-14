@@ -5,6 +5,13 @@ define(function (require) {
     var ko = require('knockout');
     var shell = require('viewModels/shell');
 
+    function Image(data) {
+        var self = this;
+
+        self.id = data.id;
+        self.url = data.url;
+    }
+
     return {
         activate: function (channelId) {
             var self = this;
@@ -17,18 +24,20 @@ define(function (require) {
             //});
 
             return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
-                self.items = response;
+                response.forEach(function (element, index, array) {
+                    self.images.push(new Image(element));
+                });
             });
         },
 
-        index: ko.observable(0),
+        images: ko.observableArray([]),
 
-        items: ko.observableArray([]),
+        index: ko.observable(0),
 
         next: function () {
             var self = this;
 
-            if (self.index() < self.items.length - 1) {
+            if (self.index() < self.images().length - 1) {
                 self.index(self.index() + 1);
             }
         },
