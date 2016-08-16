@@ -5,7 +5,7 @@ define(function (require) {
     var dataService = {};
 
     dataService.addImageToChannel = function (channelId, imageId) {
-        var url = basePath + '/channels/' + channelId + '/images' + imageId;
+        var url = basePath + '/channels/' + channelId + '/images/' + imageId;
 
         return $.ajax({
             url: url,
