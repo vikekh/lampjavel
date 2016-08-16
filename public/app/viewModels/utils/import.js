@@ -28,7 +28,7 @@ define(function (require) {
             var images = parse(reader.result);
 
             data = images;
-            import();
+            doImport();
         }
     }
 
@@ -38,7 +38,7 @@ define(function (require) {
         }
     }
 
-    function import() {
+    function doImport() {
         for (var i = 0; i < data.length; i++) {
             dataService.createImage({ url: data[i] }).done(function (data) {
                 dataService.addImageToChannel(shell.channelId(), data.id);
@@ -51,7 +51,7 @@ define(function (require) {
     }
 
     function parse(content) {
-        return content.split('\r\n');
+        return content.trim().split(/\s*[\r\n]+\s*/g);
     }
 
     return viewModel;
