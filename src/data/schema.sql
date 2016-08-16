@@ -73,15 +73,3 @@ create table `lampjavel_image_tags` (
 
 insert into `lampjavel_users` (`id`, `email`, `created_at`, `updated_at`) values
 ('admin', 'admin@admin.com', null, null);
-
-insert into `lampjavel_channels` (`id`, `is_public`, `created_at`, `updated_at`) values
-('lampjavel', true, null, null);
-
-insert into `lampjavel_channel_admins` (`channel_id`, `user_id`) values
-('lampjavel', 'admin');
-
-insert into `lampjavel_images` (`url`, `created_at`, `updated_at`) values
-('http://i.imgur.com/MRxVkZw.png', null, null);
-
-insert into `lampjavel_channel_images` (`channel_id`, `image_id`) values
-('lampjavel', last_insert_id());
