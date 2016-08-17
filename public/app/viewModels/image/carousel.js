@@ -1,6 +1,5 @@
 define(function (require) {
-    var $ = require('jquery');
-    var app = require('durandal/app');
+    //var app = require('durandal/app');
     var dataService = require('dataService');
     var ko = require('knockout');
     var shell = require('viewModels/shell');
@@ -23,9 +22,12 @@ define(function (require) {
                 //self.nextImage();
             //});
 
-            return dataService.getImagesFromChannel(shell.channelId(), { sort: 'random' }).done(function (response) {
-                response.forEach(function (element, index, array) {
-                    self.images.push(new Image(element));
+            return dataService.getImagesFromChannel(
+                shell.channelId(),
+                { sort: 'random' }
+            ).done(function (data) {
+                data.forEach(function (value, index, array) {
+                    self.images.push(new Image(value));
                 });
             });
         },

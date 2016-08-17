@@ -1,16 +1,5 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app, ko) {
     return {
-        changeChannel: function () {
-            app.trigger('channelContext', this.channelId());
-            router.navigate('#channel/' + this.channelId())
-        },
-
-        channelId: ko.observable(),
-
-        header: ko.observable(),
-
-        router: router,
-
         activate: function () {
             router.map([
                 {
@@ -36,6 +25,17 @@
             ]).buildNavigationModel();
             
             return router.activate();
-        }
+        },
+
+        changeChannel: function () {
+            app.trigger('channelContext', this.channelId());
+            router.navigate('#channel/' + this.channelId())
+        },
+
+        channelId: ko.observable(),
+
+        header: ko.observable(),
+
+        router: router
     };
 });

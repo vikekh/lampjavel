@@ -16,7 +16,11 @@
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (system, app, viewLocator) {
+define(function (require) {
+    var app = require('durandal/app');
+    var system = require('durandal/system');
+    var viewLocator = require('durandal/viewLocator');
+
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");

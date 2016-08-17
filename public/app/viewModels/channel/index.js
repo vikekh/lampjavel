@@ -1,5 +1,4 @@
 define(function (require) {
-    var app = require('durandal/app');
     var dataService = require('dataService');
     var ko = require('knockout');
     var shell = require('viewModels/shell');
@@ -10,23 +9,21 @@ define(function (require) {
         this.isPublic = ko.observable(data.isPublic === 1);
     }
 
-    var viewModel = {};
+    return {
+        activate: function (channelId) {
+            var self = this;
 
-    viewModel.activate = function (channelId) {
-        var self = this;
+            shell.header('Channels');
 
-        shell.header('Channels');
+            return dataService.getChannels().done(function (data, textStatus, jqXhr) {
+                self.channels([]);
 
-        return dataService.getChannels().done(function (response) {
-            self.channels([]);
+                data.forEach(function (value, index, array) {
+                    self.channels.push(new Channel(value));
+                });
+            });
+        },
 
-            for (var i = 0; i < response.length; i++) {
-                self.channels.push(new Channel(response[i]));
-            }
-        });
+        channels: ko.observableArray([])
     };
-
-    viewModel.channels = ko.observableArray([]);
-
-    return viewModel;
 });

@@ -1,15 +1,13 @@
 define(function (require) {
     var ko = require('knockout');
 
-    var viewModel = {};
+    return {
+        activate: function (url) {
+            var self = this;
 
-    viewModel.activate = function (url) {
-        var self = this;
+            self.url(url);
+        },
 
-        self.url(url);
+        url: ko.observable()
     };
-
-    viewModel.url = ko.observable();
-
-    return viewModel;
 });

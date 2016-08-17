@@ -1,4 +1,6 @@
-define(['durandal/app', 'jquery', 'knockout', 'dataService', 'viewModels/shell'], function (app, $, ko, dataService, shell) {
+define(function (require) {
+    var shell = require('viewModels/shell');
+
     return {
         activate: function () {
             shell.header('Welcome!')
