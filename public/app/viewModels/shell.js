@@ -1,4 +1,8 @@
-﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app, ko) {
+﻿define(function (require) {
+    var app = require('durandal/app');
+    var ko = require('knockout');
+    var router = require('plugins/router');
+
     return {
         activate: function () {
             router.map([
