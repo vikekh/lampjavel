@@ -11,19 +11,6 @@ define(function (require) {
         self.url = data.url;
     }
 
-    function getImages(channelId, images) {
-        return dataService.getImagesFromChannel(
-            channelId,
-            { sort: 'random' }
-        ).done(function (data) {
-            data.forEach(function (value, index, array) {
-                images.push(new Image(value));
-            });
-        }).fail(function () {
-            images.removeAll();
-        });
-    }
-
     return {
         activate: function (channelId) {
             var self = this;
@@ -32,10 +19,25 @@ define(function (require) {
             shell.header('#' + channelId);
 
             app.on('channelChange', function (channelId) {
-                getImages(channelId, self.images);
+                self.getImages();
             });
 
-            return getImages(channelId, self.images);
+            return self.getImages();
+        },
+
+        getImages: function () {
+            var self = this;
+
+            self.images.removeAll();
+
+            return dataService.getImagesFromChannel(
+                shell.channelId(),
+                { sort: 'random' }
+            ).done(function (data) {
+                data.forEach(function (value, index, array) {
+                    self.images.push(new Image(value));
+                });
+            }).fail(function () {});
         },
 
         images: ko.observableArray([]),
@@ -45,16 +47,21 @@ define(function (require) {
         next: function () {
             var self = this;
 
-            if (self.index() < self.images().length - 1) {
-                self.index(self.index() + 1);
-            }
+            self.stepIndex(1);
         },
 
         previous: function () {
             var self = this;
 
-            if (self.index() > 0) {
-                self.index(self.index() - 1);
+            self.stepIndex(-1);
+        },
+
+        stepIndex: function (value) {
+            var self = this;
+            var index = self.index() + value;
+
+            if (index >= 0 && index < self.images().length) {
+                self.index(index);
             }
         }
     };
