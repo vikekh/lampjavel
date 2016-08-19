@@ -1,5 +1,5 @@
 define(function (require) {
-    //var app = require('durandal/app');
+    var app = require('durandal/app');
     var dataService = require('dataService');
     var ko = require('knockout');
     var shell = require('viewModels/shell');
@@ -11,6 +11,19 @@ define(function (require) {
         self.url = data.url;
     }
 
+    function getImages(channelId, images) {
+        return dataService.getImagesFromChannel(
+            channelId,
+            { sort: 'random' }
+        ).done(function (data) {
+            data.forEach(function (value, index, array) {
+                images.push(new Image(value));
+            });
+        }).fail(function () {
+            images.removeAll();
+        });
+    }
+
     return {
         activate: function (channelId) {
             var self = this;
@@ -18,18 +31,11 @@ define(function (require) {
             shell.channelId(channelId);
             shell.header('#' + channelId);
 
-            //app.on('channelContext', function (channelId) {
-                //self.nextImage();
-            //});
-
-            return dataService.getImagesFromChannel(
-                shell.channelId(),
-                { sort: 'random' }
-            ).done(function (data) {
-                data.forEach(function (value, index, array) {
-                    self.images.push(new Image(value));
-                });
+            app.on('channelChange', function (channelId) {
+                getImages(channelId, self.images);
             });
+
+            return getImages(channelId, self.images);
         },
 
         images: ko.observableArray([]),

@@ -32,8 +32,9 @@
         },
 
         changeChannel: function () {
-            app.trigger('channelContext', this.channelId());
-            router.navigate('#channel/' + this.channelId())
+            var self = this;
+            
+            app.trigger('channelChange', self.channelId());
         },
 
         channelId: ko.observable(),
