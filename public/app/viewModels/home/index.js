@@ -1,9 +1,13 @@
 define(function (require) {
     var shell = require('viewModels/shell');
 
-    return {
-        activate: function () {
-            shell.header('Welcome!')
-        }
+    var viewModel = {
+        activate: activate
     };
+
+    function activate() {
+        shell.header('Welcome!');
+    }
+
+    return viewModel;
 });

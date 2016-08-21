@@ -3,27 +3,34 @@ define(function (require) {
     var ko = require('knockout');
     var shell = require('viewModels/shell');
 
+    var viewModel = {
+        activate: activate,
+        channels: ko.observableArray([])
+    };
+
     function Channel(data) {
         this.id = ko.observable(data.id);
         this.imagesCount = ko.observable(data.imagesCount);
         this.isPublic = ko.observable(data.isPublic === 1);
     }
 
-    return {
-        activate: function (channelId) {
-            var self = this;
+    function activate(channelId) {
+        var self = this;
 
-            shell.header('Channels');
+        shell.header('Channels');
 
-            return dataService.getChannels().done(function (data, textStatus, jqXhr) {
-                self.channels([]);
+        return getChannels();
+    }
 
-                data.forEach(function (value, index, array) {
-                    self.channels.push(new Channel(value));
-                });
+    function getChannels() {
+        viewModel.channels.removeAll();
+
+        dataService.getChannels().done(function (data, textStatus, jqXhr) {
+            data.forEach(function (value, index, array) {
+                viewModel.channels.push(new Channel(value));
             });
-        },
+        })
+    }
 
-        channels: ko.observableArray([])
-    };
+    return viewModel;
 });
